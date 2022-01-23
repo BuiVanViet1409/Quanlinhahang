@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}"
+	>
+  	<head>
+		
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+			<div class="col mt-4 ">
+				<section class="row">
+					<div class="col mt-4 ">
+					  <form action="/admin/monan/saveOrUpdate" method="post" 
+					  enctype="multipart/form-data" th:object="${monAn}">
+						<div class="card">
+						  <div class="card-header">
+							<h2 th:text="${monAn.isEdit ? 'Chỉnh sửa món ăn' : 'Thêm mới món ăn'}"></h2>
+						  </div>
+						  <div class="card-body">
+							<div class="row">
+							  <div class="col-7">
+								<input type="hidden" th:field="*{isEdit}"> 
+								<div class="form-group" th:if="${monAn.isEdit}">
+									<input type="hidden" class="form-control" name="maMonAn" id="maMonAn"
+										th:field="*{maMonAn}" aria-describedby="maMonAnHid" placeholder="Mã món ăn">
+								</div>
+								<div class="form-group">
+								  <label for="tenMonAn">Tên món ăn</label>
+								  <input type="text" class="form-control" name="tenMonAn" id="tenMonAn" 
+									th:field="*{tenMonAn}"
+								 	aria-describedby="tenMonAnHid" placeholder="Tên món ăn">
+								  <small th:if="${#fields.hasErrors('tenMonAn')}" id="tenMonAnHid" class="form-text text-danger">Tên không hợp lệ </small>
+								</div>
+								<div class="input-group form-group">
+								  <span class="input-group-text">Giá</span>
+								  <input type="number" min="0" name="gia" id="gia"
+									th:field="*{gia}"
+								  	class="form-control" placeholder="Giá">
+								  <span class="input-group-text">VNĐ</span>
+								  <small th:if="${#fields.hasErrors('gia')}" id="tenMonAnHid" class="form-text text-danger">Nhỏ nhất là 1</small>
+								</div>
+								
+								<div class="form-group">
+								  <label for="maNhomMon">Nhóm món</label>
+								  <select class="form-control" name="maNhomMon" 
+								    th:field="*{maNhomMon}" id="maNhomMon">
+									<option th:each="item : ${nhomMonAns}" th:value="${item.maNhomMon}"
+										th:text="${item.tenNhomMon}" th:selected="${item.maNhomMon == monAn.maNhomMon}"
+									>Tên nhóm món</option>
+								  </select>
+								</div>
+								
+							  </div>
+							  <div class="col-3">
+								<script>
+									function chooseFile(fileInput){
+										/*nếu người dùng lựa chọn nội dung của file thì
+										sẽ kiểm tra xem có lựa chọn hay ko,
+										nếu có-> tạo ra biến reader là thể hiện của FileReader
+										*/
+										if(fileInput.files && fileInput.files[0]){
+											var reader = new FileReader();
+
+											//thực hiện khi nội dung đc nạp
+											reader.onload = function(e){
+												$('#image').attr('src', e.target.result);
+											}
+
+											reader.readAsDataURL(fileInput.files[0]);
+										}
+									}
+								</script>
+								
+								<img id="image" th:src="${monAn.image!=null ? '/admin/monan/images/' + monAn.image : 'images/noimage.png'}"
+								  src="/images/miku.jpg" width="90%" 
+								  class="img-fluid" alt="">
+								  <div class="form-group">
+									<label for="productImage">Image File</label>
+									<input type="file" onchange="chooseFile(this)" name="imageFile" class="form-control-file" id="productImage" placeholder="Product Image" aria-describedby="productImage">
+									
+								  </div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col">
+								<div class="form-group">
+								  <label for="mota">Mô tả</label>
+								  <textarea class="form-control" th:field="*{mota}" name="mota" id="mota" rows="5"></textarea>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						  <div class="card-footer text-muted">
+							<a th:unless="${monAn.isEdit}" th:href="@{/admin/monan/searchpaginated}" class="btn btn-success">Danh sách món ăn</a>
+							<a th:if="${monAn.isEdit}" th:href="@{/admin/monan/add}" class="btn btn-success">Thêm mới</a>
+							<a th:if="${monAn.isEdit}" th:href="@{/admin/monan/searchpaginated}" class="btn btn-success">Danh sách món ăn</a>
+							<button th:text="${monAn.isEdit ? 'Cập nhật' : 'Lưu'}" class="btn btn-primary"></button>
+							<a th:if="${monAn.isEdit}" th:href="@{'/admin/monan/delete/' + ${monAn.maMonAn}}" class="btn btn-danger float-right">Xóa</a>
+						  </div>
+						</div>
+					  </form>
+					</div>
+				  </section>
+			</div>
+		</section>
+	</body>
+</html>

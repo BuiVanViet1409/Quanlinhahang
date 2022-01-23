@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Giỏ hàng</title>
+		<link rel="stylesheet" href="/customer/header/ship.css">
+    
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+            <div class="row container">
+                <div class="col-3"></div>
+                <div class="col-6 mt-5">
+                    <form action="checkout" method="POST" th:object="${checkout}" class="form-horizontal">
+                        <h3>Thanh toán đơn hàng</h3> 
+
+                        <div class="control-group">
+                            <label class="control-label">Họ tên <sup>*</sup></label> 
+                            <div class="controls">
+                                <input th:field="*{ten}" th:text="${ten}" class="inputcontact w-100" type="text" name="ht" id="" placeholder=" Họ và tên" />
+                            </div>
+                        </div>
+
+                        <div class="control-group mt-2">
+                            <label class="control-label">Email <sup>*</sup></label> 
+                            <div class="controls">
+                                <input th:field="*{email}" th:text="${email}" class="inputcontact w-100" type="email" name="email" id=""
+                                placeholder="  Địa chỉ email của bạn" />
+                            </div>
+                        </div>
+
+                        <div class="control-group mt-2">
+                            <label class="control-label">Số điện thoại <sup>*</sup></label> 
+                            <div class="controls">
+                                <input th:field="*{phone}" class="inputcontact w-100" type="text" id=""
+                            placeholder="Số điện thoại" />
+                            </div>
+                        </div>
+                        
+                        <div class="control-group mt-2">
+                            <label class="control-label">Địa chỉ <sup>*</sup></label>
+                            <div class="controls">
+                                <textarea th:field="*{address}" th:text="${address}" class="inputcontact w-100" placeholder="Địa chỉ"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="control-group mt-2">
+                            <label class="control-label">Ghi chú</label>
+                            <div class="controls">
+                                <textarea th:field="*{note}" name="nd" class="inputcontact1 w-100" placeholder="  Nội dung" cols="30"
+                            rows="6"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="control-group mt-2">
+                            <div class="controls">
+                                <input type="submit" name="submitAccount" value="Đặt hàng"
+                                    class="shopBtn exclusive">
+                            </div>
+                        </div>
+                        
+                    </form>
+				</div>
+    
+            </div>
+        </section>
+    </body>
+</html>

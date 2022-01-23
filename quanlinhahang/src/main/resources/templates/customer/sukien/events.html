@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Sự kiện</title>
+        <link rel="stylesheet" href="/customer/header/events.css">
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/customer/images/banner/event1.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/customer/images/banner/event2.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="events-hover ">
+                <p class="text-center fw-bold fs-1 text-danger fw-lighter">ƯU ĐÃI BẤT NGỜ</p>
+                <div class="container-fluid text-center">
+                    <div>
+                        <figure class="c4-izmir">
+                            <img src="/customer/images/events/tiec-dn.jpg">
+                            <figcaption class="c4-layout-bottom-left">
+                                <h3>
+                                    TỔ CHỨC TIỆC TẤT NIÊN
+                                </h3>
+                            </figcaption>
+                        </figure>
+                        <figure class="c4-izmir">
+                            <img src="/customer/images/events/tiec-gd.jpg" class="w-100">
+                            <figcaption class="c4-layout-bottom-left">
+                                <h3>
+                                    TỔ CHỨC TIỆC GIA ĐÌNH
+                                </h3>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div>
+                        <figure class="c4-izmir">
+                            <img src="/customer/images/events/tiec-cty.jpg" class="w-100">
+                            <figcaption class="c4-layout-bottom-left">
+                                <h3>
+                                    TỔ CHỨC TIỆC CÔNG TY
+                                </h3>
+                            </figcaption>
+                        </figure>
+                        <figure class="c4-izmir">
+                            <img src="/customer/images/events/tiec-cuoi1.jpg" style="height: 365px; width: 36rem;">
+                            <figcaption class="c4-layout-bottom-left">
+                                <h3>
+                                    TỔ CHỨC TIỆC CƯỚI
+                                </h3>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <!-- {/* EVENT */} -->
+            <div class="event2 container-fluid">
+                <!-- {/* Quét mã QR */} -->
+                <div class="row mt-3">
+                    <div class="col-6 align-items-center justify-content-center text-center">
+                        <img src="/customer/images/events/qr.png" class="w-50 " alt="" />
+                    </div>
+                    <div class="combo-text col-6">
+                        <span class="fw-lighter fs-3 fw-bold">QUÉT MÃ LIỀN TAY - NHẬN NGAY VOUCHER</span>
+                        <p class=" fw-lighter fs-5 fw-normal">NHẬN NGAY Voucher off 100% Cá kèo nướng muối ớt trị
+                            giá 145K
+                            📱Đơn giản chỉ cần nhấc điện thoại quét mã QR đăng ký thành viên mới</p>
+                    </div>
+                </div>
+                <!-- {/* Combo Gia đình */} -->
+                <div class="row mt-2">
+                    <div class="combo-text col-6">
+                        <span class="fw-lighter fs-3 fw-bold">COMBO GIA ĐÌNH - ƯU ĐÃI HẾT MÌNH</span>
+                        <p class=" fw-lighter fs-5 fw-normal">
+                            Sao phải bận tâm suy nghĩ xem hôm nay ăn gì?
+                            Hãy dành thời gian đó tận hưởng những giây phút vui vẻ bên gia đình cùng COMBO ưu đãi của
+                            TV:
+                            - CHỈ 465K combo 1 lẩu cá kèo + 1 bid cuốn size N dành cho 4 người (Nguyên giá 519K)
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <img src="/customer/images/events/ComboGD.png" class="w-75 " alt="" />
+                    </div>
+
+                </div>
+                <!-- {/* Combo Mùa nước nổi */} -->
+                <div class="row mt-1">
+                    <div class="col-6 align-items-center justify-content-center text-center">
+                        <img src="/customer/images/events/ComboNN.png" class="w-75" alt="" />
+                    </div>
+                    <div class="combo-text col-6">
+                        <span class="fw-lighter fs-3 fw-bold">COMBO MÙA NƯỚC NỔI</span>
+                        <p class=" fw-lighter fs-5 fw-normal">
+                            Nếu nói đến những món ăn đặc trưng gây thương nhớ nhất của miền Tây không thể không nhắc tới
+                            Lẩu cá linh bông điên điển.
+                            Lẩu cá linh chinh phục người ăn ngay từ màu sắc, hương thơm thoang thoảng cùng vị chua thanh
+                            của nước lẩu, vị thơm giòn của bông điên điển.
+                            Đặc biệt, cá linh đầu mùa được xem là ngon, ngọt thịt nhất, chỉ bé như đầu đũa còn được gọi
+                            là cá linh non hay cá linh sữa, vì cá bé nên xương mềm, bụng có mỡ béo ngậy. Những ai đã
+                            thưởng thức món ăn này đều gật gù khen ngon và rồi mang theo nỗi nhớ da diết mỗi mùa nước
+                            nổi.
+                            COMBO mùa nước nổi - DUY NHẤT tại Nhà hàng TV dành cho 4 người chỉ 540K (135k/người) gồm:
+                            - Lẩu cá linh bông điên điển, set đầy đủ rau nhúng và hoa lẩu miền Tây
+                            - 8 chú cá kèo tươi rói
+                        </p>
+                    </div>
+                </div>
+
+                <!-- {/* Combo Eo thon */} -->
+                <div class="row mt-3">
+
+                    <div class="combo-text col-6">
+                        <span class="fw-lighter fs-3 fw-bold">COMBO ĂN NGON - EO VẪN THON</span>
+                        <p class=" fw-lighter fs-5 fw-normal">
+                            Để có eo thon, dáng đẹp là phải sớm “chia tay “ với những món ăn mình yêu thích ư?
+                            Chuyện đó xưa rồi! Nhất là tại TV với thực đơn những
+                            set đồ ăn đầy đủ dinh dưỡng, ăn no căng mà vẫn thấy
+                            cơ thể nhẹ nhàng, thoải mái.
+                        </p>
+                    </div>
+                    <div class="col-6 align-items-center justify-content-center text-center">
+                        <img src="/customer/images/events/ComboET.png" class="w-75" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </body>
+</html>

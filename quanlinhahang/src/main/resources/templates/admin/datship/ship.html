@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}"
+	>
+  	<head>
+
+        <script>
+$( document ).ready(function() {
+    var current_id = "";
+    var startIndex = 0;
+    var merge = 1;
+    $('#bang1').find('tr').each(function( index ) {
+        if (current_id == "") {
+            current_id = $(this).find('.id').text();
+            startIndex = index;
+        } else {
+            var next  = $(this).find('.id').text();
+            if (next == current_id) {
+                $('#bang1').find('tr:eq(' + index + ')').find('.del').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.id').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.ten').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.email').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.address').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.phone').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.ngayLap').remove();
+                $('#bang1').find('tr:eq(' + index + ')').find('.note').remove();
+                
+                merge++;
+            } else {
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.del').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.id').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.ten').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.email').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.address').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.phone').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.ngayLap').prop('rowspan', merge);
+                $('#bang1').find('tr:eq(' + startIndex + ')').find('.note').prop('rowspan', merge);
+
+                current_id = $(this).find('.id').text();
+                startIndex = index;
+            }
+        }
+    });
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.del').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.id').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.ten').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.email').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.address').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.phone').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.ngayLap').prop('rowspan', merge);
+    $('#bang1').find('tr:eq(' + startIndex + ')').find('.note').prop('rowspan', merge);
+
+});
+
+        </script>
+		
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+            <div class="col mt-4 ">
+                <div class="card">
+                  <div class="card-header">
+                    <h2>Danh sách đặt ship</h2>
+                  </div>
+                  <div class="card-body">
+                    <div th:if="${message != null}" class="alert alert-primary" role="alert">
+                      <i>[[${message}]]</i>
+                    </div>
+                    <div class="row mt-2 mb-2">
+                        <div class="col">
+                            <form th:action="@{/admin/datban-manage/searchpaginated}">
+                                <div class="form-inline float-left">
+                                  <label for="hoTen"></label>
+                                  <input type="text" class="form-control ml-2" name="hoTen" id="hoTen" aria-describedby="helpId" placeholder="Tên khách hàng">
+                                  <button class="btn btn-outline-primary ml-2">Tìm kiếm</button>
+                                </div>
+                            </form>
+                            <div class="float-right">
+                              <!-- <a th:href="@{/admin/nhommonan/searchpaginated}" class="btn btn-outline-primary">Quản lí nhóm món</a>
+                              <a th:href="@{/admin/monan/add}" class="btn btn-outline-primary">Thêm mới món ăn</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--Hiển thị dữ liệu khi có dữ liệu được tìm thấy trong datBanPage-->
+                    <table class="table">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th></th>
+                            <th>Mã hóa đơn</th>
+                            <th>Tên khách hàng</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày lập</th>
+                            <th>Nội dung</th>
+                            <th>Tên món ăn</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bang1">
+                            <!--iStat: lấy thông tin thống kê (vị trí, STT của các thành phần trong bảng)-->
+                            <!--content: danh sách các category-->
+                            <tr th:each="item, iStat : ${list}">
+                                <th class="del" scope="row"><a th:href="@{'/ship/delete/' + ${item.maHoaDon}}"><i class="fas fa-times"></i></a></th>
+                                <td class="id" th:text="${item.maHoaDon}"></td>
+                                <td class="ten" th:text="${item.ten}"></td>
+                                <td class="email" th:text="${item.email}"></td>
+                                <td class="address" th:text="${item.address}"></td>
+                                <td class="phone" th:text="${item.phone}"></td>
+                                <td class="ngayLap" th:text="${item.ngayLap}"></td>
+                                <td class="note" th:text="${item.note}"></td>
+                                <td class="tenMonAn" th:text="${item.tenMonAn}"></td>
+                                <td class="soLuong" th:text="${item.soLuong}"></td>
+                                <td class="thanhTien" th:text="${item.thanhTien}"></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </section>
+    
+    </body>
+  </html>

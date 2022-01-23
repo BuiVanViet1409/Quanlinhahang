@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Đăng nhập</title>
+        <link rel="stylesheet" href="/customer/header/style.css">
+        <link rel="stylesheet" href="/customer/header/header.css">
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+            <div id="wrapper">
+                <form th:action="@{/alogin}" id="form-login" method="post" th:object="${quanTri}">
+                    <h1 class="form-heading">Đăng nhập</h1>
+                    <div th:if="${message != null}" class="alert alert-primary" role="alert">
+						<i>[[${message}]]</i>
+					</div>
+                    <div class="form-group">
+                        <i class="far fa-user"></i>
+                        <input th:field="*{username}" type="text" class="form-input" placeholder="Tài khoản" />
+                        <small id="usernameHid" th:if="${#fields.hasErrors('username')}" class="text-danger">Tên đăng nhập không đúng</small>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-key"></i>
+                        <input th:field="*{password}" type="password" class="form-input" placeholder="Mật khẩu" />
+                        <small id="passwordHid" th:if="${#fields.hasErrors('password')}" class="text-danger">Mật khẩu không đúng</small>
+                    </div>
+                    <button type="submit" defaultValue="Đăng nhập" class="form-submit text-center">Đăng nhập</button>
+                    <div class='dangkytrangchu d-flex mt-3 text-center justify-content-center'>
+                        <div class='trangchu'>
+                            <a style="text-decoration: none;" class=" text-white" th:href="@{trang-chu}">Quay lại</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

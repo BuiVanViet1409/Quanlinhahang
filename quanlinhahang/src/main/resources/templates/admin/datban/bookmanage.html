@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}"
+	>
+  	<head>
+		
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+      <div class="col mt-4 ">
+        <div class="card">
+          <div class="card-header">
+            <h2>Danh sách đặt bàn</h2>
+          </div>
+          <div class="card-body">
+            <div th:if="${message != null}" class="alert alert-primary" role="alert">
+              <i>[[${message}]]</i>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <form th:action="@{/admin/datban-manage/searchpaginated}">
+                        <div class="form-inline float-left">
+                          <label for="hoTen"></label>
+                          <input type="text" class="form-control ml-2" name="hoTen" id="hoTen" aria-describedby="helpId" placeholder="Tên khách hàng">
+                          <button class="btn btn-outline-primary ml-2">Tìm kiếm</button>
+                        </div>
+                    </form>
+                    <div class="float-right">
+                      <!-- <a th:href="@{/admin/nhommonan/searchpaginated}" class="btn btn-outline-primary">Quản lí nhóm món</a>
+                      <a th:href="@{/admin/monan/add}" class="btn btn-outline-primary">Thêm mới món ăn</a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row" th:if="${!datBanPage.hasContent()}">
+              <div class="col">
+                <div class="alert alert-danger" role="alert">
+                  <strong>Không có bàn nào được tìm thấy</strong>
+                </div>
+              </div>
+            </div>
+            <!--Hiển thị dữ liệu khi có dữ liệu được tìm thấy trong datBanPage-->
+            <table class="table table-striped table-inverse"
+              th:if="${datBanPage.hasContent()}">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Tên khách hàng</th>
+                  <th>Email</th>
+                  <th>Số điện thoại</th>
+                  <th>Số lượng</th>
+                  <th>Ngày đến</th>
+                  <th>Nội dung</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                  <!--iStat: lấy thông tin thống kê (vị trí, STT của các thành phần trong bảng)-->
+                  <!--content: danh sách các category-->
+                  <tr th:each="item, iStat : ${datBanPage.content}">
+                    <td th:text="${item.hoTen}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.phone}"></td>
+                    <td th:text="${item.soluong}"></td>
+                    <td th:text="${item.ngayden}"></td>
+                    <td th:text="${item.content}"></td>
+                    <td>
+                      <a th:href="@{'/admin/datban-manage/edit/' +${item.maDatBan}}" class="btn btn-outline-warning" title="Sửa"><i class="fas fa-edit"></i></a>
+                      <a th:data-id="${item.maDatBan}" 
+                        th:data-name="${item.hoTen}"
+                        onclick="showConfirmModalDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"
+                        th:href="@{'/admin/datban-manage/delete/' + ${item.maDatBan}}" class="btn btn-outline-danger" title="Xóa"><i class="fas fa-recycle"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <script>
+              function showConfirmModalDialog(id, name){
+                $('#customerName').text(name);
+                $('#yesOption').attr('href','admin/monan/delete/' + id);
+                $('#confirmationId').modal('show');
+              }
+            </script>
+            <!-- Modal:xác nhận yêu cầu xóa thông tin sản phẩm -->
+            <div class="modal fade" id="confirmationId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    Bạn có muốn xóa không? "<span id="customerName"></span>"?
+                  </div>
+                  <div class="modal-footer">
+                    <a id="yesOption" type="button" class="btn btn-danger">Có</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            <form action="">
+              <div class="form-inline float-left">
+                <label for="size">Page Size: </label>
+                <!--onchange: cập nhật lại nội dung hiển thị trên trang-->
+                <select name="size" id="size" class="form-control ml-2"
+                  onchange="this.form.submit()">
+                  <option th:selected="${datBanPage.size == 5}" value="5">5</option>
+                  <option th:selected="${datBanPage.size == 10}" value="10">10</option>
+                  <option th:selected="${datBanPage.size == 15}" value="15">15</option>
+                  <option th:selected="${datBanPage.size == 20}" value="20">20</option>
+                  <option th:selected="${datBanPage.size == 30}" value="30">30</option>
+                </select>
+              </div>
+            </form>
+            <nav aria-label="Page navigation" 
+              th:if="${datBanPage.totalPages > 0}">
+              <ul class="pagination justify-content-center">
+                <li th:class="${1 == datBanPage.number + 1} ? 'page-item active' : 'page-item' ">
+                  <a th:href="@{/admin/monan/searchpaginated(name=${tenMonAn}, size=${datBanPage.size}, page=${1})}"
+                    class="page-link">
+                    Đầu trang
+                  </a>
+                </li>
+                <li class="page-item active"
+                  th:each="pageNumber : ${pageNumbers}"
+                  th:if="${datBanPage.totalPages > 1}"
+                  th:class="${pageNumber == datBanPage.number + 1} ? 'page-item active' : 'page-item'">
+                  <a th:href="@{/admin/monan/searchpaginated(name=${tenMonAn}, size=${datBanPage.size}, page=${pageNumber})}"
+                    class="page-link" 
+                    th:text="${pageNumber}">
+                  </a>
+                </li>
+                <li th:class="${datBanPage.totalPages == datBanPage.number + 1} ? 'page-item active' : 'page-item' ">
+                  <a th:href="@{/admin/monan/searchpaginated(name=${tenMonAn}, size=${datBanPage.size}, page=${datBanPage.totalPages})}"
+                    class="page-link">
+                    Cuối trang
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+  </body>
+</html>

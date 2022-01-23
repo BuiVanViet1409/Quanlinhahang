@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Chi tiết</title>
+		<link rel="stylesheet" href="/customer/header/details.css">
+    
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+			<div class="container mt-5 text-center">
+				<a th:href="@{/book}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/book.png" alt="Đặt bàn" />
+				</a>&emsp;&emsp;&emsp;&emsp;
+				<a th:href="@{/book}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/ship.png" alt="Đặt ship" />
+				</a>
+			</div>
+			<div class="details-content container-fluid">
+				<!-- Text-img -->
+				<div th:each="item : ${monAn}" class="detail-imgtext d-flex container">
+					<div class="detail-img ">
+						<img id="image" th:src="${item.image!=null ? '/admin/monan/images/' + item.image : 'images/noimage.jpg'}"
+                                            src="/images/miku.jpg" width="300px" height="250px" 
+                                            class="img-fluid" alt="">
+					</div>
+					<div class="ms-5 detail-text col-5">
+						<div class="text1">
+							<h1 th:utext="${item.tenMonAn}"></h1>
+						</div>
+						<div class="text2">
+							<span class="fs-4 fa-w-1" th:utext="${item.gia}"></span>đ
+						</div>
+						<div class="text3">
+							<span class="fs-6" style="width:10px" th:utext="${item.mota}"></span>
+						</div>
+						
+						<div class="d-flex mt-2">
+							<a th:href="@{'/shopping-cart/add/' + ${item.maMonAn}}" class="ms-2 btn btn-success rounded-pill text-white text-decoration-none fw-normal"><i
+									class="fas fa-cart-plus me-1"></i>Đặt hàng
+							</a>
+						</div>
+						</p>
+					</div>
+				</div>
+			</div>
+        </section>
+    </body>
+</html>

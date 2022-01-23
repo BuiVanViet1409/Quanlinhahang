@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+  </head>
+  <body>
+      <div th:fragment="nav">
+        <nav class="navbar navbar-expand">
+          <div class="col-3">
+            <a class="navbar-brand" href="index.html">
+              <!-- Logo icon -->
+              <b class="logo-icon ps-2">
+                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                <!-- Dark Logo icon -->
+                <img src="/admin/images/logo1.png" alt="homepage" class="light-logo" width="25" />
+              </b>
+              <!--End Logo icon -->
+              <!-- Logo text -->
+              <span class="logo-text ms-2">
+                <!-- dark Logo text -->
+                <img src="/admin/images/logotext.png" alt="homepage" class="light-logo" width="200" />
+              </span>
+            </a>
+          </div>
+          <div class="col-7">
+            <div class="collapse navbar-collapse container" id="collapsibleNavId">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" th:href="@{/trang-chu}">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/admin/monan/searchpaginated}">Quản lí món ăn</a>
+                </li>
+                <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/admin/datban-manage/searchpaginated}">Quản lí đặt bàn</a>
+                </li>
+                <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/ship/detail}">Quản lí đặt ship</a>
+                </li>
+                <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/admin/lienhe/searchpaginated}">Người dùng liên hệ</a>
+                </li>
+                <!-- <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/admin/quantri}">Quản lí cá nhân</a>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+            <div class="col-2 collapse navbar-collapse container">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <!-- <li class="nav-item" th:if="${session.username}">
+                  <a href="#" class="nav-link" th:text="${session.username}"></a>
+                </li> -->
+                <li class="nav-item" th:unless="${session.username}">
+                  <a class="nav-link" th:href="@{/alogin}">Đăng nhập</a>
+                </li>
+                <!-- <li class="nav-item" th:if="${session.username}">
+                  <a class="nav-link" th:href="@{/alogout}">Đăng xuất</a>
+                </li> -->
+              </ul>
+              <div th:if="${session.username}" >
+                <button th:text="${session.username}" type="button"
+                  class="dropdown-toggle btn btn-primary rounded-pill text-white" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" th:href="@{/alogout}">Đăng xuất</a></li>
+                  </ul>
+              </div>
+            </div>
+              <!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form> -->
+            </div>
+          </nav>
+      </div>
+  </body>
+</html>

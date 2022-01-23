@@ -1,0 +1,14 @@
+.content-contact{
+    background-color: rgb(252, 228, 228);
+}
+input{
+    border: solid 0px #ffffff;
+}
+.inputcontact{
+    border-radius: 20px;
+    height: 3rem;
+}
+.inputcontact1{
+    border-radius: 20px;
+    border: solid 0px #ffffff;
+}

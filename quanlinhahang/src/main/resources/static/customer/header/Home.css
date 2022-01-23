@@ -1,0 +1,13 @@
+.slide img{
+    max-width: 100%;
+}
+.home-content{
+    background-color: #e9d8c6;
+}
+.card-text{
+    font-weight: normal;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #ffffff00 !important;
+}

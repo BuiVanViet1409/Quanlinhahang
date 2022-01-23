@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Menu</title>
+		<link rel="stylesheet" href="/customer/header/menu.css">
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+            <div class="container mt-5 text-center">
+				<a th:href="@{/book}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/book.png" alt="Đặt bàn" />
+				</a>&emsp;&emsp;&emsp;&emsp;
+				<a th:href="@{/shopping-cart/views}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/ship.png" alt="Đặt ship" />
+				</a>
+			</div>
+            <div class="container mt-1 text-center">
+                &emsp;
+				<a th:href="@{/book}" class="btn rounded-circle"> 
+					<h3>Đặt bàn</h3>
+				</a>&emsp;&ensp;
+				<a th:href="@{/book}" class="btn rounded-circle"> 
+					<h3>Đặt Ship</h3>
+				</a>
+			</div>
+            <div class="contentmenu">
+               
+                <div class="textmenu">
+                    <h1 class="text-center fw-bold fw-lighter mt-5 text-success">TẤT CẢ CÁC MÓN ĂN</h1>
+                </div>
+                <div class="menufood">
+                    <div class="ms-5">
+                        <hr />
+                        <ul class="nav nav-pills justify-content-start " id="pills-tab" role="tablist">
+                            <li class="nav-item btn btn-success rounded-pill me-3" role="presentation">
+                                <a class="nav-link text-white" th:href="@{/collections/all}"  role="tab">Tất cả món ăn</a>
+                            </li>
+                            <li th:each="item : ${nhomMonAns}" class="nav-item btn btn-success rounded-pill me-3" role="presentation">
+                                <a th:text="${item.tenNhomMon}" class="nav-link text-white" id="pills-cuon-tab" 
+                                     role="tab" 
+                                    aria-selected="true" th:href="@{'/collections/' + ${item.maNhomMon}}"></a>
+                            </li>
+                            <li class="nav-item btn" style="margin-left: 100px;"  role="presentation">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Sắp xếp
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item" th:href="@{/collections/all}">Theo bảng chữ cái từ A-Z</a>
+                                      <a class="dropdown-item" th:href="@{/collections/descname}">Theo bảng chữ cái từ Z-A</a>
+                                      <a class="dropdown-item" th:href="@{/collections/ascprice}">Giá từ thấp tới cao</a>
+                                      <a class="dropdown-item" th:href="@{/collections/descprice}">Giá từ cao tới thấp</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!-- {/* Cuốn */} -->
+                            <div class="tab-pane fade show active" id="pills-cuon" role="tabpanel"
+                                aria-labelledby="pills-cuon-tab">
+                                <div class="row mt-5">
+                                    <!-- {/* Left */} -->
+                                    <div th:each="item : ${monAnByCategory}" class="col-6">
+                                        <div class="d-flex">
+                                            <img id="image" th:src="${item.image!=null ? '/admin/monan/images/' + item.image : 'images/noimage.jpg'}"
+                                            src="/images/miku.jpg" width="300px" height="250px" 
+                                            class="img-fluid" alt="">
+                                            <div class="ms-2">
+                                                <p class="fw-bold"> [[${item.tenMonAn}]]........................................ [[${item.gia}]]đ</p>
+                                                <div class="mt-5 btn btn-success rounded-pill">
+                                                    <a th:href="@{'/shopping-cart/add/' + ${item.maMonAn}}" class=" text-white text-decoration-none fw-normal"><i
+                                                            class="fas fa-cart-plus me-1"></i>Đặt hàng</a>
+                                                </div>
+                                                <div class="mt-5 btn btn-warning rounded-pill">
+                                                    <a th:href="@{'/chitiet/' + ${item.maMonAn}}" class=" text-white text-decoration-none fw-normal"><i
+                                                            class="fas fa-cart-plus me-1"></i>Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

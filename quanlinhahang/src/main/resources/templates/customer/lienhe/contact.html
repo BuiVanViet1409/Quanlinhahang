@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Liên hệ</title>
+		<link rel="stylesheet" href="/customer/header/contact.css">
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+			<div class="container mt-5 text-center">
+				<a th:href="@{/book}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/book.png" alt="Đặt bàn" />
+				</a>&emsp;&emsp;&emsp;&emsp;
+				<a th:href="@{/shopping-cart/views}" class="btn btn-success rounded-circle text-white"> 
+					<img src="/customer/images/logo/ship.png" alt="Đặt ship" />
+				</a>
+			</div>
+            <div class="container mt-1 text-center">
+                &emsp;
+				<a th:href="@{/book}" class="btn rounded-circle"> 
+					<h3>Đặt bàn</h3>
+				</a>&emsp;&ensp;
+				<a th:href="@{/book}" class="btn rounded-circle"> 
+					<h3>Đặt Ship</h3>
+				</a>
+			</div>
+			<div th:if="${message != null}" class="alert alert-primary" role="alert">
+				<i>[[${message}]]</i>
+			  </div>
+            <div class="container-fluid contact-content mt-5 row d-flex">
+				<!-- {/* Left */} -->
+				<div class=" col-6">
+					<h1 class=" fw-bold fw-lighter text-success">LIÊN HỆ</h1>
+	
+					<div class="mt-5">
+						<span class="fs-5 fw-bold fw-lighter"><i class="fas fa-phone-alt fs-1 text-success me-3"></i>01 234
+							567 88</span>
+					</div>
+					<div>
+						<span class="fs-5 fw-bold fw-lighter "><i
+								class="fas fa-mobile-alt fs-1 text-success mt-5 me-4"></i>01 234 567 89</span>
+					</div>
+					<div class="d-flex">
+						<i class=" far fa-clock fs-1 text-success mt-5 text-center"></i>
+						<div>
+							<p class="iconclock fs-5 fw-bold fw-lighter ms-1 mt-5 ">
+								Trưa: 11h30 - 14h00 <br />
+								Tối: 17h30 - 21h00
+							</p>
+						</div>
+					</div>
+					<hr />
+					<span class="fs-5 fw-bold fw-lighter mt-5"><i
+							class="fas fa-map-marker-alt  fs-1 text-success me-4"></i>Số 75, đường 2/4, Nha Trang, Khánh
+						Hòa</span>
+	
+				</div>
+				<!-- {/* Right */} -->
+				<div class="col-6 mt-5">
+					<form th:action="@{/customer/lienhe/gui}" method="post" id="form-order" th:object="${lienHe}">
+						<input th:field="*{hoTen}" class="inputcontact w-100" type="text" name="ht" id="" placeholder="Họ và tên" />
+						<input th:field="*{email}" class="inputcontact w-100 mt-4" type="email" name="email" id=""
+							placeholder=" Nhập email của bạn" />
+						<input th:field="*{phone}" class="inputcontact w-100 mt-4" type="text" name="sdt" id=""
+							placeholder="  Số điện thoại của bạn" />
+						<textarea th:field="*{noidung}" name="nd" class="inputcontact1 w-100 mt-4" placeholder="Nội dung" cols="30"
+							rows="12"></textarea>
+						<button type='submit' class='btn btn-primary fw-normal' value="Liên hệ" data-toggle="modal" data-target="#exampleModal">Liên hệ</button>
+					</form>
+				</div>
+			</div>
+        </section>
+    </body>
+</html>

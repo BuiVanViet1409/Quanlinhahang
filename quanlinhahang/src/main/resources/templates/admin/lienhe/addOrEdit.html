@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}"
+	>
+  	<head>
+		
+	</head>
+
+	<body>
+		<section class="row" layout:fragment="content">
+			<div class="col-6 offset-3 mt-4 ">
+			<form th:action="@{/admin/lienhe/saveOrUpdate}" method="post" th:object="${lienHe}">
+				<div class="card">
+				<div class="card-header">
+					<h2 th:unless="${lienHe.isEdit}">Thêm mới khách hàng</h2>
+					<h2 th:if="${lienHe.isEdit}">Chỉnh sửa khách hàng</h2>
+				</div>	
+				<div class="card-body">
+					<div class="form-group">
+						<input type="hidden" th:field="*{isEdit}">
+						<input type="hidden" class="form-control" th:field="*{maLienHe}" aria-describedby="maLienHeHid" placeholder="Mã khách hàng" readonly>
+						<small th:if="${#fields.hasErrors('maLienHe')}" id="maLienHeHid" class="form-text text-muted">Category ID is required</small>
+					</div>
+					<div class="form-group">
+						<label for="hoTen">Tên khách hàng</label>
+						<input type="text" class="form-control" th:field="*{hoTen}" id="hoTen" aria-describedby="hoTenHid" placeholder="Tên khách hàng">
+						<small th:if="${#fields.hasErrors('hoTen')}" id="hoTenHid" class="form-text text-danger">Tên không hợp lệ hoặc không được để trống</small>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="text" class="form-control" th:field="*{email}" id="email" aria-describedby="emailHid" placeholder="Email">
+						<small th:if="${#fields.hasErrors('email')}" id="emailHid" class="form-text text-danger">Email không hợp lệ hoặc không được để trống</small>
+					</div>
+					<div class="form-group">
+						<label for="phone">Số điện thoại</label>
+						<input type="text" class="form-control" th:field="*{phone}" id="phone" aria-describedby="phoneHid" placeholder="Tên khách hàng">
+						<small th:if="${#fields.hasErrors('phone')}" id="phoneHid" class="form-text text-danger">Số điện thoại không hợp lệ </small>
+					</div>
+					<div class="form-group">
+						<label for="noidung">Nội dung</label>
+						<input type="text" class="form-control" th:field="*{noidung}" id="noidung" aria-describedby="noidungHid" placeholder="Tên khách hàng">
+						<small th:if="${#fields.hasErrors('noidung')}" id="noidungHid" class="form-text text-danger">Tên không hợp lệ hoặc không được để trống</small>
+					</div>
+				</div>
+				<div class="card-footer text-muted">
+					<a th:href="@{/admin/lienhe/searchpaginated}" class="btn btn-success">Danh sách khách hàng liên hệ</a>
+					<button class="btn btn-primary"><i class="fas fa-save"></i>
+					<span th:if="${lienHe.isEdit}">Cập nhật</span>
+					<span th:unless="${lienHe.isEdit}">Lưu</span>
+					</button>
+				</div>
+				</div>
+			</form>
+			</div>
+		</section>
+	</body>
+</html>

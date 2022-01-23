@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Giỏ hàng</title>
+		<link rel="stylesheet" href="/customer/header/ship.css">
+    
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+            <div class="carts-content container-fluid">
+                <h1 class="fs-4 fw-normal fw-lighter fw-bold">GIỎ HÀNG</h1>
+                <div th:if="${message != null}" class="alert alert-primary" role="alert">
+                    <i>[[${message}]]</i>
+                  </div>
+                <div class="table-cart ">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col"></th>
+                                <th colspan="2">Đồ ăn</th>
+                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            
+                                <tr th:each="item : ${cartItem}">
+                                    <form th:action="@{/shopping-cart/update}" method="post">
+                                        <input type="hidden" name="maMonAn" th:value="${item.maMonAn}">
+                                        <th scope="row"><a th:href="@{'/shopping-cart/delete/' + ${item.maMonAn}}"><i class="fas fa-times"></i></a></th>
+                                        <td><img id="image" th:src="${item.image!=null ? '/admin/monan/images/' + item.image : 'images/noimage.jpg'}"
+                                            src="/images/miku.jpg" width="70px" height="70px" 
+                                            class="img-fluid" alt=""></td>
+                                        <td th:text="${item.tenMonAn}"></td>
+                                        <td th:text="${item.gia}"></td>
+                                        <td>
+                                            <input class="input-qty" max="100" min="0" name="soluong" type="number"
+                                                th:value="${item.soluong}" onblur="this.form.submit()">
+                                        </td>
+                                        <td th:text="${item.gia * item.soluong}"></td>
+                                    </form>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="float-end">
+                    <tr class="text-end">
+                        <th colspan="6"><button class="mt-2 btn btn-success rounded-pill">
+                            <a th:href="@{/shopping-cart/clear}" class="text-white text-decoration-none fw-normal">Xóa giỏ hàng</a>
+                        </button></th>
+                        <th colspan="6"><button class="mt-2 btn btn-success rounded-pill">
+                                <a th:href="@{/collections/all}" class="text-white text-decoration-none fw-normal">Thêm
+                                    đồ</a>
+                            </button></th>
+                        <th colspan="6"><button class="mt-2 btn btn-success rounded-pill">
+                            <a th:href="@{/shopping-cart/checkout}" class="text-white text-decoration-none fw-normal">Đặt hàng</a>
+                        </button></th>
+                    </tr>
+                </div>
+                <div class="row" style="clear: right;">
+                    <!-- Left -->
+                    <div class="col-6">
+                        <span class="fs-5 fw-bold fw-lighter mt-5"><i
+                                class="fas fa-map-marker-alt  fs-1 text-success me-4"></i>Số 75, đường 2/4, Nha Trang, Khánh
+                            Hòa</span>
+                    </div>
+                    <!-- Right -->
+                    <div class="col-6 text-end">
+                        <p class="fs-4 text-black fw-normal">Tổng tiền: <span class="fs-5 fw-bold text-success" th:text="${total}"></span>
+                        </p>
+                        <div>
+                            <button type="button" class="btn btn-success  rounded-3 text-white w-100">Đặt ship</button>
+                        </div>
+                        <div class="mt-3">
+                            <a th:href="@{/book}"> <button type="button"
+                                    class="btn btn-warning  rounded-3 text-white  w-100">Đặt bàn</button></a>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </section>
+    </body>
+</html>

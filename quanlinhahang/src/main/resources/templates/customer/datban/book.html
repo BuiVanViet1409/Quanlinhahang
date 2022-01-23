@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{customer/dashboardLayout.html}"
+	>
+  	<head>
+		<title>Đặt bàn</title>
+		<link rel="stylesheet" href="/customer/header/order.css">
+	</head>
+
+	<body>
+		<section class="row mt-5" layout:fragment="content">
+            <div id="wrapper1">
+                <form action="/book/datban" method="post" id="form-order" th:object="${datBan}">
+                    <h1 class="form-heading1">ĐẶT BÀN</h1>
+                    <div th:if="${message != null}" class="alert alert-primary" role="alert">
+                        <i>[[${message}]]</i>
+                      </div>
+                    <div class="form-group1">
+                        <input th:field="*{hoTen}" type="text" class="form-input" placeholder="*Họ và tên" />
+                        <small th:if="${#fields.hasErrors('hoTen')}" id="hotenHid" class="form-text text-danger">Tên không hợp lệ</small>
+                    </div>
+                    <div class="form-group1">
+                        <input th:field="*{email}" type="email" class="form-input" placeholder="*Địa chỉ email" />
+                        <small th:if="${#fields.hasErrors('email')}" id="hotenHid" class="form-text text-danger">Email ko hợp lệ</small>
+                    </div>
+                    <div class="form-group1">
+                        <input th:field="*{phone}" type="text" class="form-input" placeholder="*Số điện thoại" />
+                        <small th:if="${#fields.hasErrors('phone')}" id="hotenHid" class="form-text text-danger">số điện thoại không hợp lệ</small>
+                    </div>
+                    <div class="form-group1">
+                        <input th:field="*{soluong}" type="number" min="1" class="form-input" placeholder="Số lượng khách" />
+                        <small th:if="${#fields.hasErrors('soluong')}" id="hotenHid" class="form-text text-danger">ít nhất 1 người</small>
+                    </div>
+                    <div class="form-group1">
+                        <input th:field="*{ngayden}" type="date" th:value="${ngayden}" class="form-input" placeholder="*Chọn ngày" />
+                        <small th:if="${#fields.hasErrors('ngayden')}" id="hotenHid" class="form-text text-danger">Vui lòng chọn ngày</small>
+                    </div>
+                    <textarea th:field="*{content}" name="nd" class='w-100' id="" cols="20" rows="10" placeholder='Nội dung'></textarea>
+                    <div class="text-center">
+                        <button type='submit' class='btn btn-warning  fw-normal' value="Đặt bàn" data-toggle="modal" data-target="#exampleModal"> Đặt bàn</button>
+                    </div>
+                    <div class='trangchu'>
+                        <a style="text-decoration: none;" class=" text-white" th:href="@{/trang-chu}">Trang chủ</a>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
